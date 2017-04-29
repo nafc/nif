@@ -42,13 +42,17 @@ pub fn from_bytes(data: Vec<u8>) -> Image {
     let width:  usize = (data[WIDTH_BYTE] + 1) as usize;
     let height: usize = (data[HEIGHT_BYTE] + 1) as usize;
     let palette_length: usize = (data[LENGTH_BYTE] as usize + 1) * 3;
+
     let palette = Palette::from_bytes(
         &data[PALETTE_BYTE..PALETTE_BYTE + palette_length]
     );
 
+    let data_byte = PALETTE_BYTE + palette_length;
+    assert_eq!(width * height, data.len() - data_byte);
+
     let mut pixels: Vec<Pixel> = Vec::with_capacity(width * height);
 
-    for id in &data[palette_length + 1..] {
+    for id in &data[data_byte..] {
         pixels.push(Pixel::new(*id as usize));
     }
 

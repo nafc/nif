@@ -12,7 +12,7 @@ mod tests {
             0x02, //3px height
             0x00, //1 color in palette
             0xff, 0xf0, 0x00, // RGB: 255 127 0
-            0x00, //first color in palette
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //6 pixels indexing first color in palette
         ];
 
         nif::from_bytes(bytes);
