@@ -1,6 +1,9 @@
 use nif::Pixel;
 use nif::Palette;
 use nif::Color;
+use std::error::Error;
+use std::fs::File;
+use std::io::prelude::*;
 
 pub struct Image {
     width:   usize,
@@ -51,4 +54,20 @@ pub fn from_bytes(data: Vec<u8>) -> Image {
     let palette = Palette::from_bytes(&data[palette_byte..]);
 
     Image::new(width, height, pixels, palette)
+}
+
+pub fn from_file(filename: &str) -> Image {
+    let mut file = match File::open(filename) {
+        Err(r)    => panic!("couldn't read {}: {}", filename, r.description()),
+        Ok(file)  => file,
+    };
+
+    let mut buffer: Vec<u8> = Vec::new();
+
+    match file.read_to_end(&mut buffer) {
+        Err(r) => panic!("couldn't read {}: {}", filename, r.description()),
+        Ok(_)  => (),
+    };
+
+    from_bytes(buffer)
 }
