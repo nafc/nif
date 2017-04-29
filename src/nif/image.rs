@@ -28,3 +28,24 @@ impl Image {
         }
     }
 }
+
+pub fn from_bytes(data: Vec<u8>) -> Image {
+    if data[..3] != [0x6e, 0x69, 0x66, 0x01] {
+        panic!("Wrong identifier")
+    }
+
+    let width:  usize = (data[4] + 1) as usize;
+    let height: usize = (data[5] + 1) as usize;
+    let palette_length: usize = (data[6] as usize + 1) * 3;
+    let palette = Palette::from_bytes(
+        &data[7..7 + palette_length]
+    );
+
+    let mut pixels: Vec<Pixel> = Vec::with_capacity(width * height);
+
+    for id in &data[palette_length + 1..] {
+        pixels.push(Pixel::new(*id as usize));
+    }
+
+    Image::new(width, height, pixels, palette)
+}
