@@ -30,8 +30,8 @@ impl Image {
 }
 
 pub fn from_bytes(data: Vec<u8>) -> Image {
-    if data[..3] != [0x6e, 0x69, 0x66, 0x01] {
-        panic!("Wrong identifier")
+    if data[..4] != [0x6e, 0x69, 0x66, 0x01] {
+        panic!("Wrong identifier, found: {:?}", &data[..4 ])
     }
 
     let width:  usize = (data[4] + 1) as usize;
