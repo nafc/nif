@@ -2,21 +2,19 @@
 Nafc image format
 
 # Specifications
-First 4 bytes are an identifier, these bytes are in hex
-`6e 69 66 01`
+First 3 bytes are an identifier, these bytes are in hex
+`6e 69 66`
 
 1 byte width then 1 byte height, the width/height is equal the the value of the byte plus one.
 
-1 byte for the amount of color in the palette, the amount is equal the the value plus one.
-if that byte is 0 then there's (0+1)\*3, so 3 colors, if it is 255 the palette is (255+1)\*3 so 768 bytes long.
+The following n bytes, n being defined as width*height, are pixels referring to the palette.
 
-from 6th byte to 6th byte + palette length is the pal
+Then the palette is the rest of the file.
 
-| byte  | meaning                     | comment                                                                                              |
-|-------|-----------------------------|------------------------------------------------------------------------------------------------------|
-| 0-3   | File identifier             | Is always `6e 69 66 01`                                                                              |
-| 4     | Width                       | width = byte + 1                                                                                     |
-| 5     | Height                      | height = byte +1                                                                                     |
-| 6     | Amount of colors in palette | amount of bytes = (byte + 1) * 3                                                                     |
-| 7-?   | RGB colors                  | Bytes rotate between meaning R, G or B.                                                              |
-| ?-End | Pixels                      | Each bytes refers to a palette value. e.g. the first color of the palette is number 0, know as 0x00. |
+| byte  | meaning         | comment                                                                                                              |
+|-------|-----------------|----------------------------------------------------------------------------------------------------------------------|
+| 0-2   | File identifier | always `6e 69 66`                                                                                                    |
+| 3     | Width           | width = value + 1                                                                                                    |
+| 4     | Height          | height = value +1                                                                                                    |
+| 5-?   | Pixels          | Each bytes refers to a palette value. e.g. the first color in the palette is value 0.                                |
+| ?-end | Palette         | The length of this palette has to be a multiple of 3 because one color is 3 bytes. e. g. every 3 bytes is one color. |
