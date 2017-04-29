@@ -1,0 +1,7 @@
+[package]
+name = "nif"
+version = "0.1.0"
+authors = ["Emile Yvan Boutet Livoff <blemille@hotmail.com>"]
+
+[dependencies]
+libnif = { path = "../libnif/" }
