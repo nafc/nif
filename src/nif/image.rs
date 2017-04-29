@@ -46,8 +46,6 @@ pub fn from_bytes(data: Vec<u8>) -> Image {
         &data[PALETTE_BYTE..PALETTE_BYTE + palette_length]
     );
 
-    println!("{:?}", &data[PALETTE_BYTE..PALETTE_BYTE - 1 + palette_length]);
-
     let mut pixels: Vec<Pixel> = Vec::with_capacity(width * height);
 
     for id in &data[palette_length + 1..] {
