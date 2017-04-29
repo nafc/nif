@@ -19,7 +19,7 @@ impl Palette {
 
     pub fn from_bytes(data: &[u8]) -> Palette {
         if data.len()%3 != 0 {
-            panic!("Palette is wrong");
+            panic!("Palette is wrong {:?}", data);
         }
 
         let mut colors: Vec<Color> = Vec::with_capacity(data.len()/3);

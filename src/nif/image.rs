@@ -29,17 +29,24 @@ impl Image {
     }
 }
 
+const WIDTH_BYTE:   usize = 4;
+const HEIGHT_BYTE:  usize = 5;
+const LENGTH_BYTE:  usize = 6;
+const PALETTE_BYTE: usize = 7;
+
 pub fn from_bytes(data: Vec<u8>) -> Image {
     if data[..4] != [0x6e, 0x69, 0x66, 0x01] {
-        panic!("Wrong identifier, found: {:?}", &data[..4 ])
+        panic!("Wrong identifier, found: {:?}", &data[..4])
     }
 
-    let width:  usize = (data[4] + 1) as usize;
-    let height: usize = (data[5] + 1) as usize;
-    let palette_length: usize = (data[6] as usize + 1) * 3;
+    let width:  usize = (data[WIDTH_BYTE] + 1) as usize;
+    let height: usize = (data[HEIGHT_BYTE] + 1) as usize;
+    let palette_length: usize = (data[LENGTH_BYTE] as usize + 1) * 3;
     let palette = Palette::from_bytes(
-        &data[7..7 + palette_length]
+        &data[PALETTE_BYTE..PALETTE_BYTE + palette_length]
     );
+
+    println!("{:?}", &data[PALETTE_BYTE..PALETTE_BYTE - 1 + palette_length]);
 
     let mut pixels: Vec<Pixel> = Vec::with_capacity(width * height);
 
