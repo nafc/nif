@@ -18,5 +18,5 @@ from 6th byte to 6th byte + palette length is the pal
 | 4     | Width                       | width = byte + 1                                                                                     |
 | 5     | Height                      | height = byte +1                                                                                     |
 | 6     | Amount of colors in palette | amount of bytes = (byte + 1) * 3                                                                     |
-| 6-?   | RGB colors                  | Bytes rotate between meaning R, G or B.                                                              |
+| 7-?   | RGB colors                  | Bytes rotate between meaning R, G or B.                                                              |
 | ?-End | Pixels                      | Each bytes refers to a palette value. e.g. the first color of the palette is number 0, know as 0x00. |
