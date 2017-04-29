@@ -16,4 +16,9 @@ mod tests {
 
         nif::from_bytes(bytes);
     }
+
+    #[test]
+    fn from_file() {
+        nif::from_file("test.nif");
+    }
 }
