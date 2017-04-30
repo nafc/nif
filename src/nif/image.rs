@@ -40,6 +40,19 @@ impl Image {
         }
         self.palette.color(self.pixels[y * self.width + x].id)
     }
+
+    pub fn set_color(&mut self, x: usize, y: usize, id: usize) {
+        if x >= self.width {
+            panic!("x is out bounds, expected lower than {}, got {}", self.width, x);
+        }
+        if y >= self.height {
+            panic!("y is out bounds, expected lower than {}, got {}", self.height, y);
+        }
+        if !self.palette.is_valid(&id) {
+            panic!("invalid palette id")
+        }
+        self.pixels[y * self.width + x].id = id;
+    }
 }
 
 const WIDTH_BYTE:   usize = 3;

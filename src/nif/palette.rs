@@ -17,6 +17,10 @@ impl Palette {
         &self.colors[id]
     }
 
+    pub fn is_valid(&self, id: &usize) -> bool {
+        id < &self.colors.len()
+    }
+
     pub fn from_bytes(data: &[u8]) -> Palette {
         if data.len()%3 != 0 {
             panic!("Palette is wrong {:?}", data);
