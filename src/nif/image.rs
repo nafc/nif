@@ -30,6 +30,16 @@ impl Image {
             pixels:  vec![Pixel::new(0); width * height],
         }
     }
+
+    pub fn color(&self, x: usize, y: usize) -> &Color {
+        if x >= self.width {
+            panic!("x is out bounds, expected lower than {}, got {}", self.width, x);
+        }
+        if y >= self.height {
+            panic!("y is out bounds, expected lower than {}, got {}", self.height, y);
+        }
+        self.palette.color(self.pixels[y * self.width + x].id)
+    }
 }
 
 const WIDTH_BYTE:   usize = 3;

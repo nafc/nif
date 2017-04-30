@@ -1,6 +1,6 @@
 #[derive(Clone)]
 pub struct Pixel {
-    id: usize,
+    pub id: usize,
 }
 
 impl Pixel {
