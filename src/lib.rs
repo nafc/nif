@@ -21,4 +21,15 @@ mod tests {
     fn from_file() {
         nif::from_file("test.nif");
     }
+
+    #[test]
+    fn set_color() {
+        let mut image = nif::Image::empty(100,100);
+
+        for x in 0..image.width {
+            for y in 0..image.height {
+                image.set_color(x, y, 0);
+            }
+        }
+    }
 }

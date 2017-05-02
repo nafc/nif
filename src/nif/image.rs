@@ -6,8 +6,8 @@ use std::fs::File;
 use std::io::prelude::*;
 
 pub struct Image {
-    width:   usize,
-    height:  usize,
+    pub width:   usize,
+    pub height:  usize,
     pixels:  Vec<Pixel>,
     palette: Palette,
 }
