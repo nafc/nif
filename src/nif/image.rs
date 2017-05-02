@@ -53,6 +53,10 @@ impl Image {
         }
         self.pixels[y * self.width + x].id = id;
     }
+
+    pub fn add_color(&mut self, color: Color) {
+        self.palette.add(color);
+    }
 }
 
 const WIDTH_BYTE:   usize = 3;

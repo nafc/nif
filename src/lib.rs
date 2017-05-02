@@ -24,11 +24,13 @@ mod tests {
 
     #[test]
     fn set_color() {
-        let mut image = nif::Image::empty(100,100);
+        let mut image = nif::Image::empty(100, 100);
+
+        image.add_color(nif::Color::RGB(255, 0, 0));
 
         for x in 0..image.width {
             for y in 0..image.height {
-                image.set_color(x, y, 0);
+                image.set_color(x, y, 1); //1 here is the seconds color RGB(255, 0, 0,)
             }
         }
     }

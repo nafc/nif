@@ -17,6 +17,10 @@ impl Palette {
         &self.colors[id]
     }
 
+    pub fn add(&mut self, color: Color) {
+        self.colors.push(color);
+    }
+
     pub fn is_valid(&self, id: &usize) -> bool {
         id < &self.colors.len()
     }
