@@ -6,11 +6,7 @@ pub struct Pixel {
 impl Pixel {
     pub fn new(id: usize) -> Pixel {
         Pixel {
-            id: id,
+            id,
         }
     }
-
-    /*pub fn color(&self) -> &Color {
-        self.palette.color(self.id)
-    }*/
 }

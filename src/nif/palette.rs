@@ -9,7 +9,7 @@ pub struct Palette {
 impl Palette {
     pub fn new(colors: Vec<Color>) -> Palette {
         Palette {
-            colors: colors
+            colors
         }
     }
 
