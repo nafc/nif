@@ -21,6 +21,10 @@ impl Palette {
         self.colors.push(color);
     }
 
+    pub fn len(&self) -> usize {
+        self.colors.len()
+    }
+
     pub fn is_valid(&self, id: &usize) -> bool {
         id < &self.colors.len()
     }

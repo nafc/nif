@@ -57,6 +57,22 @@ impl Image {
     pub fn add_color(&mut self, color: Color) {
         self.palette.add(color);
     }
+
+    pub fn to_bytes(self) -> Vec<u8> {
+        let mut data: Vec<u8> = Vec::with_capacity(5 + self.width * self.height + self.palette.len() * 3);
+
+        //Add identifier
+        data.extend_from_slice(&[0x6e, 0x69, 0x66]);
+
+        data.push(self.width as u8 - 1);
+        data.push(self.height as u8 - 1);
+
+        for pixel in self.pixels {
+            data.push(pixel.id as u8);
+        }
+
+        vec![0]
+    }
 }
 
 const WIDTH_BYTE:   usize = 3;
