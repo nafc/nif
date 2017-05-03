@@ -3,7 +3,7 @@ pub enum Color {
 }
 
 pub struct Palette {
-    colors: Vec<Color>,
+    pub colors: Vec<Color>,
 }
 
 impl Palette {
