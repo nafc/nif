@@ -3,7 +3,7 @@ pub enum Color {
 }
 
 pub struct Palette {
-    colors: Vec<Color>,
+    pub colors: Vec<Color>,
 }
 
 impl Palette {
@@ -19,10 +19,6 @@ impl Palette {
 
     pub fn add(&mut self, color: Color) {
         self.colors.push(color);
-    }
-
-    pub fn len(&self) -> usize {
-        self.colors.len()
     }
 
     pub fn is_valid(&self, id: &usize) -> bool {
