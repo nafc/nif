@@ -36,7 +36,7 @@ mod tests {
     }
 
     #[test]
-    fn to_bytes() {
+    fn to_raw() {
         let bytes: Vec<u8> = vec![
             0x6e, 0x69, 0x66, //file identifier
             0x01, //2px width
