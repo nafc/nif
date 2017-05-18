@@ -58,6 +58,15 @@ impl Image {
         self.palette.colors.push(color);
     }
 
+    pub fn find_color(&self, color: Color) -> bool {
+        for palette_color in &self.palette.colors {
+            if color == *palette_color {
+                return true;
+            }
+        }
+        false
+    }
+
     pub fn to_raw(&self) -> Vec<u8> {
         let mut data: Vec<u8> = Vec::with_capacity(5 + self.width * self.height + self.palette.colors.len() * 3);
 
