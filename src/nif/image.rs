@@ -104,7 +104,23 @@ pub fn from_raw(data: Vec<u8>) -> Image {
         pixels.push(Pixel::new(*id as usize));
     }
 
-    let palette = Palette::from_bytes(&data[palette_byte..]);
+    let palette: Palette;
+
+    {
+        let palette_data = &data[palette_byte..];
+
+        if palette_data.len()%3 != 0 {
+            panic!("Palette is wrong {:?}", palette_data);
+        }
+
+        let mut colors: Vec<Color> = Vec::with_capacity(palette_data.len()/3);
+
+        for i in 0..palette_data.len()/3 {
+            colors.push(Color::RGB(palette_data[i],palette_data[i+1],palette_data[i+2]));
+        }
+
+        palette = Palette::new(colors)
+    }
 
     Image::new(width, height, pixels, palette)
 }
