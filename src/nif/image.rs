@@ -58,13 +58,13 @@ impl Image {
         self.palette.colors.push(color);
     }
 
-    pub fn find_color(&self, color: Color) -> bool {
-        for palette_color in &self.palette.colors {
+    pub fn find_color(&self, color: Color) -> Option<usize> {
+        for (i, palette_color) in self.palette.colors.iter().enumerate() {
             if color == *palette_color {
-                return true;
+                return Some(i);
             }
         }
-        false
+        None
     }
 
     pub fn to_raw(&self) -> Vec<u8> {
