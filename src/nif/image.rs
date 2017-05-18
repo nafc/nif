@@ -38,7 +38,7 @@ impl Image {
         if y >= self.height {
             panic!("y is out bounds, expected lower than {}, got {}", self.height, y);
         }
-        self.palette.color(self.pixels[y * self.width + x].id)
+        &self.palette.colors[self.pixels[y * self.width + x].id as usize]
     }
 
     pub fn set_color(&mut self, x: usize, y: usize, id: usize) {
@@ -55,10 +55,10 @@ impl Image {
     }
 
     pub fn add_color(&mut self, color: Color) {
-        self.palette.add(color);
+        self.palette.colors.push(color);
     }
 
-    pub fn to_bytes(&self) -> Vec<u8> {
+    pub fn to_raw(&self) -> Vec<u8> {
         let mut data: Vec<u8> = Vec::with_capacity(5 + self.width * self.height + self.palette.colors.len() * 3);
 
         //Add identifier
@@ -89,7 +89,7 @@ const WIDTH_BYTE:   usize = 3;
 const HEIGHT_BYTE:  usize = 4;
 const PIXEL_BYTE:   usize = 5;
 
-pub fn from_bytes(data: Vec<u8>) -> Image {
+pub fn from_raw(data: Vec<u8>) -> Image {
     if data[..3] != [0x6e, 0x69, 0x66] {
         panic!("Wrong identifier, found: {:?}", &data[..3]);
     }
@@ -122,5 +122,5 @@ pub fn from_file(filename: &str) -> Image {
         Ok(_)  => (),
     };
 
-    from_bytes(buffer)
+    from_raw(buffer)
 }

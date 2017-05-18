@@ -5,16 +5,16 @@ mod tests {
     use super::nif;
 
     #[test]
-    fn from_bytes() {
+    fn from_raw() {
         let bytes: Vec<u8> = vec![
             0x6e, 0x69, 0x66, //file identifier
             0x01, //2px width
             0x02, //3px height
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, //6 pixels indexing first color in palette
-            0xff, 0xf0, 0x00, // RGB: 255 127 0
+            0xff, 0xf0, 0x00, // RGB: 255 240 0
         ];
 
-        nif::from_bytes(bytes);
+        nif::from_raw(bytes);
     }
 
     #[test]
@@ -45,6 +45,6 @@ mod tests {
             0xff, 0xf0, 0x00, // RGB: 255 127 0
         ];
 
-        assert_eq!(bytes.clone(), nif::from_bytes(bytes).to_bytes());
+        assert_eq!(bytes.clone(), nif::from_raw(bytes).to_raw());
     }
 }
