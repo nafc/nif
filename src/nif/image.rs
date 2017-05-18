@@ -58,6 +58,10 @@ impl Image {
         self.palette.colors.push(color);
     }
 
+    pub fn remove_color(&mut self, i: usize) {
+        self.palette.colors.remove(i);
+    }
+
     pub fn find_color(&self, color: Color) -> Option<usize> {
         for (i, palette_color) in self.palette.colors.iter().enumerate() {
             if color == *palette_color {
